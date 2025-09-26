@@ -3,7 +3,7 @@ package main
 import (
 	"crypto/rand"
 	"fmt"
-	"math/big"
+	"math/rand"
 	"os"
 
 	"github.com/davecgh/go-spew/spew"
@@ -14,28 +14,29 @@ import (
 // store the shortened and full URL, and then redirect a user navigating to the
 // shortened URL to the full URL
 
-var urlMap = make(map[string]string)
-const urlCodeLength = 8
+const UrlCodeLength = 8
 
-func main(){
-	temp := generateURLCode()
+var urlMap = make(map[string]string)
+
+func main() {
+	temp := generateUrlCode()
 	urlMap[temp] = os.Args[1]
 	fmt.Printf("The code is: %v\n", temp)
 	spew.Dump(urlMap)
 }
 
-func generateURLCode()string{
-	code:=""
-	charsList:="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-	for range(urlCodeLength){
-		c, _ := rand.Int(rand.Reader,big.NewInt(int64(len(charsList))))
-		code += string(charsList[c.Int64()])
+func generateUrlCode() string {
+	code := ""
+	charsList := "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+	for range UrlCodeLength {
+		c := rand.Intn(len(charsList))
+		code += string(charsList[c])
 	}
 
 	// Check to confirm that the code is not present in the url map
-	_,ok := urlMap[code]
+	_, ok := urlMap[code]
 	if ok {
-		code = generateURLCode()
+		code = generateUrlCode()
 	}
 	return code
 }
