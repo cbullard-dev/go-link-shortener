@@ -18,7 +18,7 @@ const UrlCodeLength = 8
 var urlMap = make(map[string]string)
 
 func main() {
-	if len(os.Args)<=1{
+	if len(os.Args) <= 1 {
 		return
 	}
 	temp := generateUrlCode()
