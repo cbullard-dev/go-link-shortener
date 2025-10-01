@@ -18,6 +18,9 @@ const UrlCodeLength = 8
 var urlMap = make(map[string]string)
 
 func main() {
+	if len(os.Args)<=1{
+		return
+	}
 	temp := generateUrlCode()
 	urlMap[temp] = os.Args[1]
 	fmt.Printf("The code is: %v\n", temp)
