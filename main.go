@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"math/rand"
 	"os"
 
+	helper "cb-dev.com/link-shortener/internal"
 	"github.com/davecgh/go-spew/spew"
 )
 
@@ -14,6 +14,7 @@ import (
 // shortened URL to the full URL
 
 const UrlCodeLength = 8
+const databaseFile = "database.json"
 
 var urlMap = make(map[string]string)
 
@@ -21,24 +22,17 @@ func main() {
 	if len(os.Args) <= 1 {
 		return
 	}
-	temp := generateUrlCode()
+
+	_, err := os.Stat(databaseFile)
+	if !os.IsNotExist(err){
+		helper.LoadData(databaseFile,urlMap)
+	}
+
+	temp := helper.GenerateUrlCode(UrlCodeLength)
 	urlMap[temp] = os.Args[1]
+	helper.SaveData(databaseFile,urlMap)
+	
 	fmt.Printf("The code is: %v\n", temp)
 	spew.Dump(urlMap)
 }
 
-func generateUrlCode() string {
-	code := ""
-	charsList := "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-	for range UrlCodeLength {
-		c := rand.Intn(len(charsList))
-		code += string(charsList[c])
-	}
-
-	// Check to confirm that the code is not present in the url map
-	_, ok := urlMap[code]
-	if ok {
-		code = generateUrlCode()
-	}
-	return code
-}
