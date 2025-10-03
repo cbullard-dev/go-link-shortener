@@ -24,15 +24,14 @@ func main() {
 	}
 
 	_, err := os.Stat(databaseFile)
-	if !os.IsNotExist(err){
-		helper.LoadData(databaseFile,urlMap)
+	if !os.IsNotExist(err) {
+		helper.LoadData(databaseFile, urlMap)
 	}
 
 	temp := helper.GenerateUrlCode(UrlCodeLength)
 	urlMap[temp] = os.Args[1]
-	helper.SaveData(databaseFile,urlMap)
-	
+	helper.SaveData(databaseFile, urlMap)
+
 	fmt.Printf("The code is: %v\n", temp)
 	spew.Dump(urlMap)
 }
-
