@@ -48,3 +48,17 @@ func TestSaveData(t *testing.T) {
 		t.Errorf(`Input data: %q, does not match the output data: %q`, testMap, loadedData)
 	}
 }
+
+func TestLoadData(t *testing.T) {
+	loadFileName := "../testdata/testDatabaseLoad.json"
+	testMap := map[string]string{"unique_key_one": "string_value_one", "unique_key_two": "string_value_two"}
+	loadMap := make(map[string]string)
+	err := LoadData(loadFileName, loadMap)
+	if err != nil {
+		t.Errorf(`Loading the data returned error: %q`, err)
+	}
+
+	if !reflect.DeepEqual(testMap, loadMap) {
+		t.Errorf(`Test data: %q, does not match the loaded data: %q`, testMap, loadMap)
+	}
+}
