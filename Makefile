@@ -8,6 +8,11 @@ run:
 	go build -o ${BINARY_NAME} main.go
 	./${BINARY_NAME}
 
+check:
+ifeq ("$(wildcard $(RELATIVE_PATH))","${RELATIVE_PATH}")
+	./${BINARY_NAME} https:\/\/example.com\/test
+endif
+
 test:
 	go test -v ./...
 
