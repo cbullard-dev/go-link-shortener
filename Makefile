@@ -1,4 +1,5 @@
 BINARY_NAME=main.out
+RELATIVE_PATH=./main.out
 
 build:
 	go build -o ${BINARY_NAME} main.go
@@ -12,7 +13,9 @@ test:
 
 clean:
 	go clean
+ifneq ("$(wildcard $(RELATIVE_PATH))","")
 	rm ${BINARY_NAME}
+endif
 
 bootstrap:
 	git fetch && git pull
