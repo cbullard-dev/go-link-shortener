@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	helper "cb-dev.com/link-shortener/internal"
+	helper "cb-dev.com/link-shortener/internal/helpers"
+	storage "cb-dev.com/link-shortener/internal/storage"
 	"github.com/davecgh/go-spew/spew"
 )
 
@@ -25,12 +26,12 @@ func main() {
 
 	_, err := os.Stat(databaseFile)
 	if !os.IsNotExist(err) {
-		helper.LoadData(databaseFile, urlMap)
+		storage.LoadData(databaseFile, urlMap)
 	}
 
 	temp := helper.GenerateUrlCode(UrlCodeLength)
 	urlMap[temp] = os.Args[1]
-	helper.SaveData(databaseFile, urlMap)
+	storage.SaveData(databaseFile, urlMap)
 
 	fmt.Printf("The code is: %v\n", temp)
 	spew.Dump(urlMap)
