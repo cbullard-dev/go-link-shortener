@@ -23,4 +23,3 @@ func TestHandleRootOrDefault(t *testing.T) {
 		t.Errorf("Expected redirect, got %d", resp.StatusCode)
 	}
 }
-
