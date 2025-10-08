@@ -30,6 +30,8 @@ func main() {
 		storage.LoadData(databaseFile, urlMap)
 	}
 
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		api.HandleRootOrDefault(w, r, urlMap)
 	})
