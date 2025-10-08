@@ -1,12 +1,12 @@
 package main
 
 import (
-	"fmt"
+	"log"
+	"net/http"
 	"os"
 
-	helper "cb-dev.com/link-shortener/internal/helpers"
+	"cb-dev.com/link-shortener/internal/api"
 	storage "cb-dev.com/link-shortener/internal/storage"
-	"github.com/davecgh/go-spew/spew"
 )
 
 // This project will be to understand the fundamentals in Go
@@ -19,20 +19,20 @@ const databaseFile = "database.json"
 
 var urlMap = make(map[string]string)
 
+// For the time being I'm going to use the built-in default mux
+// I might add my own mux later
+// var mux = http.NewServeMux()
+
 func main() {
-	if len(os.Args) <= 1 {
-		return
-	}
 
 	_, err := os.Stat(databaseFile)
 	if !os.IsNotExist(err) {
 		storage.LoadData(databaseFile, urlMap)
 	}
 
-	temp := helper.GenerateUrlCode(UrlCodeLength)
-	urlMap[temp] = os.Args[1]
-	storage.SaveData(databaseFile, urlMap)
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		api.HandleRootOrDefault(w, r, urlMap)
+	})
 
-	fmt.Printf("The code is: %v\n", temp)
-	spew.Dump(urlMap)
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
