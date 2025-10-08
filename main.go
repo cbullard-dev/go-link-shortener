@@ -34,5 +34,10 @@ func main() {
 		api.HandleRootOrDefault(w, r, urlMap)
 	})
 
+	http.HandleFunc("/add", func(w http.ResponseWriter, r *http.Request) {
+		api.HandleAddRoute(w, r, urlMap, UrlCodeLength)
+		storage.SaveData(databaseFile, urlMap)
+	})
+
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
