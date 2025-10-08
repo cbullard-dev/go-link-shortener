@@ -4,13 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Link Shortener</title>
+  <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-  <p>This is the index of my link shortener</p>
-  <form name="URL Input" class="url-input-form" action="/add" method="post" enctype="multipart/form-data">
-    <label for="url">Enter the URL:</label>
-    <input type="url" name="url" id="url-input" required/>
-    <input type="submit" value="Shorten"/>
-  </form>
+  <div class="container">
+    <h1>Link Shortener</h1>
+    <p>Enter your long URL below to shorten it</p>
+
+    <form class="url-input-form" action="/add" method="post" enctype="multipart/form-data">
+      <label for="url-input">URL</label>
+      <input type="url" name="url" id="url-input" required>
+      <input type="submit" value="Shorten">
+    </form>
+  </div>
 </body>
 </html>
