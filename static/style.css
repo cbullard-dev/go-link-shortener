@@ -11,6 +11,7 @@ body {
   margin: 0;
 }
 
+
 /* Shared card style for main content */
 .container {
   background: white;
@@ -21,6 +22,7 @@ body {
   text-align: center;
 }
 
+
 /* Titles and text */
 h1 {
   font-size: 1.8rem;
@@ -28,9 +30,11 @@ h1 {
   color: #2b2b2b;
 }
 
+
 p {
   margin: 0.5rem 0 1.5rem;
 }
+
 
 /* Form styles */
 form {
@@ -39,10 +43,12 @@ form {
   gap: 1rem;
 }
 
+
 label {
   font-weight: 600;
   text-align: left;
 }
+
 
 input[type="url"] {
   padding: 0.6rem;
@@ -50,6 +56,7 @@ input[type="url"] {
   border-radius: 6px;
   font-size: 1rem;
 }
+
 
 input[type="submit"],
 .button {
@@ -64,14 +71,72 @@ input[type="submit"],
   transition: background-color 0.2s ease;
 }
 
+
 input[type="submit"]:hover,
 .button:hover {
   background-color: #0056b3;
 }
+
 
 /* Error message */
 .error {
   color: #b00020;
   font-weight: 600;
   margin-bottom: 1rem;
+}
+
+
+/* Redirect URL section */
+.redirect-url-header {
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #2b2b2b;
+}
+
+
+.redirect-url {
+  display: block;
+  color: #007bff;
+  text-decoration: none;
+  word-break: break-all;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+}
+
+
+.redirect-url:hover {
+  text-decoration: underline;
+}
+
+
+/* Copy button - matches Shorten button but smaller */
+.copy-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 0.5rem;
+}
+
+
+.copy-btn:hover {
+  background-color: #0056b3;
+}
+
+
+/* Copied confirmation text */
+.copied-text {
+  display: inline-block;
+  color: #28a745;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  padding: 0.4rem 0.8rem;
+  background-color: #d4edda;
+  border-radius: 6px;
+  border: 1px solid #c3e6cb;
 }

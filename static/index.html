@@ -18,8 +18,24 @@
     </form>
     <div>
       <h5 class="redirect-url-header">{{.RedirectUrlHeader}}</h5>
-      <p class="redirect-url">{{.RedirectUrl}}</p>
+      <a class="redirect-url" href="{{.RedirectUrl}}">{{.RedirectUrl}}</a>
+      {{if .RedirectUrl}}
+      <button class="copy-btn" id="copy-btn" onclick="copyToClipboard('{{.RedirectUrl}}')">Copy</button>
+      <span class="copied-text" id="copied-text" style="display: none;">Copied!</span>
+      {{end}}
     </div>
   </div>
+
+  <script>
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(function() {
+        // Hide button and show "Copied!" text
+        document.getElementById('copy-btn').style.display = 'none';
+        document.getElementById('copied-text').style.display = 'inline';
+      }).catch(function(err) {
+        console.error('Failed to copy: ', err);
+      });
+    }
+  </script>
 </body>
 </html>
